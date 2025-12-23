@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Donor & Charity Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="logo">DC</div>
+            <div class="brand-text">
+                <div class="brand-title">DonorCharity</div>
+                <div class="brand-sub">Admin</div>
+            </div>
+        </div>
+
+        <nav id="menu" class="menu">
+            <button data-page="dashboard" class="active">Dashboard</button>
+            <button data-page="organizations">Organizations</button>
+            <button data-page="campaigns">Campaigns</button>
+            <button data-page="donors">Donors</button>
+            <button data-page="donations">Donations</button>
+            <button data-page="fund-allocations">Fund Allocations</button>
+            <button data-page="users">Users</button>
+        </nav>
+
+        <div class="user-box">
+            <div class="small">Signed in as</div>
+            <div id="current-user" class="current-user">Not signed in</div>
+            <div class="auth-buttons">
+                <button id="btn-login" class="btn primary">Sign in</button>
+                <button id="btn-logout" class="btn ghost" style="display:none">Sign out</button>
+            </div>
+            <button id="btn-user-create" class="btn" style="margin-top:10px">Create User</button>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <h1 id="page-title">Dashboard</h1>
+            <div class="top-controls">
+                <input id="search" placeholder="Search..." />
+                <button id="refresh" class="btn">Refresh</button>
+            </div>
+        </header>
+
+        <section id="content" class="content">
+            <div id="dashboard-page" class="dashboard-page">
+                <div class="hero-inner">
+                    <h2>It's not how much we give but how much <span class="accent-love">love</span> we put into <span class="accent-giving">giving</span></h2>
+                    <p class="muted">— Mother Teresa</p>
+                    <div class="cards">
+                        <div class="card"><div class="label">Organizations</div><div class="value" id="count-org">—</div></div>
+                        <div class="card"><div class="label">Campaigns</div><div class="value" id="count-campaign">—</div></div>
+                        <div class="card"><div class="label">Donors</div><div class="value" id="count-donor">—</div></div>
+                        <div class="card"><div class="label">Donations (total)</div><div class="value" id="count-donation">—</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="organizations-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="organizations"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="campaigns-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="campaigns"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="donors-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="donors"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="donations-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="donations"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fund-allocations-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="fund-allocations"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="users-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="users"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="list-page" class="list-page" style="display:none">
+                <div class="entity-surface">
+                    <div class="entity-toolbar">
+                        <div class="list-info muted"></div>
+                        <div class="list-actions" data-entity="list"></div>
+                    </div>
+                    <div class="entity-body">
+                        <div class="list-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">© DonorCharity — Demo</footer>
+    </main>
+</div>
+
+<div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+        <div class="modal-header">
+            <h3 id="modal-title">Create</h3>
+            <p class="modal-subtitle" id="modal-subtitle">Fill in the details below to continue.</p>
+        </div>
+        <div id="form-area" class="modal-body"></div>
+        <div class="modal-actions">
+            <button id="modal-cancel" class="btn ghost">Cancel</button>
+            <button id="modal-save" class="btn primary">Save</button>
+        </div>
+    </div>
+</div>
+
+<div id="user-modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+        <div class="modal-header">
+            <h3>Create Your Access</h3>
+            <p class="modal-subtitle">Set up credentials to sign in and manage the platform.</p>
+        </div>
+        <div class="modal-body">
+            <div class="form-field">
+                <label for="u_username">Username</label>
+                <input id="u_username" type="text" placeholder="Choose a unique username">
+            </div>
+            <div class="form-field">
+                <label for="u_email">Email</label>
+                <input id="u_email" type="email" placeholder="name@example.com">
+            </div>
+            <div class="form-field">
+                <label for="u_password">Password</label>
+                <input id="u_password" type="password" placeholder="Create a strong password">
+            </div>
+            <div class="form-field">
+                <label for="u_phone">Phone</label>
+                <input id="u_phone" type="text" placeholder="Optional contact number">
+            </div>
+            <div class="form-field">
+                <label for="u_role">Role</label>
+                <input id="u_role" type="text" value="USER" placeholder="e.g. ADMIN or USER">
+            </div>
+        </div>
+        <div id="u_error" class="form-error" role="alert"></div>
+        <div class="modal-actions">
+            <button id="u_cancel" class="btn ghost">Cancel</button>
+            <button id="u_save" class="btn primary">Create</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
